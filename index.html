@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>שונים אבל שווים · הפניקס</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=block">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ שער כניסה · פותר autoplay ונותן שליטה בקול ============ -->
+<div class="gate" id="gate">
+  <div class="gate-inner">
+    <img class="gate-logo" src="logo.png" alt="הפניקס">
+    <div class="kicker">מרחב למידה</div>
+    <h1 class="gate-title">שונים אבל שווים</h1>
+    <p class="gate-sub">הלומדה מלווה בקול ובטקסט מסונכרן. אפשר לעבור ביניהם בכל רגע.</p>
+    <div class="gate-actions">
+      <button class="cta" id="gateSound">
+        <span class="ms" aria-hidden="true">volume_up</span> התחילו עם קול
+      </button>
+      <button class="cta ghost" id="gateSilent">
+        <span class="ms" aria-hidden="true">volume_off</span> המשיכו ללא קול
+      </button>
+    </div>
+    <p class="gate-note">כל מה שנאמר בקול מופיע גם ככתוביות על המסך.</p>
+  </div>
+</div>
+
+<div class="app" id="app" aria-hidden="true">
+
+<!-- ============ סרגל עליון ============ -->
+<header class="topbar">
+  <div class="top-left">
+    <button class="icon-btn" id="homeBtn" title="חזרה למסע" aria-label="חזרה למסע">
+      <span class="ms" aria-hidden="true">home</span>
+    </button>
+    <img class="brand-logo" src="logo.png" alt="הפניקס">
+    <span class="brand-sub">מרחב למידה</span>
+  </div>
+  <div class="top-right">
+    <div class="toolbox-mini" id="toolboxMini" title="ארגז הכלים שלך">
+      <span class="ms" aria-hidden="true">auto_awesome</span>
+      <b id="toolCount">0</b>
+    </div>
+    <div class="avatar-mini">נ</div>
+  </div>
+</header>
+
+<!-- ============ סרגל התקדמות אנכי ============ -->
+<nav class="rail" id="rail" aria-label="התקדמות במסע">
+  <div class="rail-head"><b id="railNow">1</b><span>מתוך 9</span></div>
+  <ol class="rail-steps" id="railSteps"></ol>
+</nav>
+
+<main id="flow">
+
+<!-- ============ 01 · פתיחה ============ -->
+<section class="screen" data-screen="welcome">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="kicker reveal" id="wTitle">פרק 01 · עדי</div>
+      <h1 class="display reveal-now">שירות נגיש מתחיל<br><span>באיך שאנחנו מקשיבים.</span></h1>
+      <p class="lead type-target" id="wLead"></p>
+      <p class="lead soft type-target" id="wLead2"></p>
+      <p class="lead soft type-target" id="wLead3"></p>
+      <button class="cta reveal" id="wCta" data-go="landing">
+        בואו נתחיל <span class="ms" aria-hidden="true">arrow_back</span>
+      </button>
+    </div>
+
+    <div class="hero-media enter-3d">
+      <div class="art-glow" aria-hidden="true"></div>
+      <div class="media-shot"><div class="video-card"></div></div>
+    </div>
+  </div>
+
+  <div class="stat-band reveal" id="wMeta">
+    <div class="stat"><b>15</b><span>דקות</span></div>
+    <div class="stat"><b>5</b><span>לקוחות</span></div>
+    <div class="stat"><b>5</b><span>מיומנויות</span></div>
+    <div class="stat stat-wide"><b>1</b><span>שיחה שבה תצטרכו להשתמש בהן</span></div>
+  </div>
+</section>
+
+<!-- ============ 02 · מפת המסע ============ -->
+<section class="screen" data-screen="landing">
+  <div class="section-head">
+    <div class="kicker">המסע שלך</div>
+    <h2>חמש מיומנויות שהופכות שירות לנגיש יותר.</h2>
+    <p class="lead type-target" id="lLead"></p>
+    <p class="soft type-target" id="lLead2"></p>
+    <p class="soft type-target" id="lLead3"></p>
+  </div>
+
+  <!-- חמשת הלקוחות, הגשר הגרפי, וארגז הכלים — טור אחד מתחת לשני
+       כדי שיהיה ברור שכל דמות פותחת מיומנות אחת -->
+  <div class="journey-map">
+    <div class="persona-grid reveal" id="skillTrack"></div>
+    <div class="map-stems reveal" id="mapStems" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="toolbox-strip reveal" id="toolboxPanel">
+      <div class="tb-head">
+        <div>
+          <span class="kicker">ארגז הכלים שלך</span>
+          <p class="tb-note">כל דמות פותחת מיומנות אחת. הארגז מתמלא ככל שתתקדמו.</p>
+        </div>
+        <b id="tbCount">0 / 5</b>
+      </div>
+      <div class="tb-slots" id="tbSlots"></div>
+    </div>
+  </div>
+
+  <div class="chapter-card reveal" id="chapterCard">
+    <div class="cc-portrait"></div>
+    <div class="cc-body">
+      <div class="kicker">הפרק הבא שלכם</div>
+      <h3>איך מתאימים את הדרך שבה נותנים שירות?</h3>
+      <p>נזהה חסם שנוצר כשהנציג מסתמך על מידע חזותי, נלמד עיקרון פעולה, ואז נעמוד מול מקרה חדש.</p>
+      <button class="cta small" data-go="persona">
+        המשיכו לפרק <span class="ms" aria-hidden="true">arrow_back</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · היכרות ============ -->
+<section class="screen" data-screen="persona">
+  <div class="persona-split">
+    <div class="persona-media enter-3d" id="personaPortrait">
+      <div class="art-glow" aria-hidden="true"></div>
+      <div class="media-shot"><div class="video-card"></div></div>
+      <div class="photo-caption">
+        <span>עדי</span>
+        <small>יוצרת תוכן</small>
+        <em class="cond-chip"><span class="ms" aria-hidden="true">visibility</span> לקות ראייה</em>
+      </div>
+    </div>
+
+    <div class="persona-story">
+      <div class="kicker type-target" id="pIntro"></div>
+
+      <!-- המגבלה נאמרת במפורש, ורק אחריה אורח החיים והחסם -->
+      <p class="condition-line type-target" id="pCondition"></p>
+      <p class="large-copy adi-voice type-target" id="pLife"></p>
+      <p class="large-copy type-target" id="pWhere"></p>
+      <p class="large-copy adi-voice type-target" id="pMoment"></p>
+      <p class="closing-note type-target" id="pClose"></p>
+
+      <div class="problem-box reveal" id="pBarrier">
+        <span>החסם המרכזי בפרק</span>
+        <b>מידע חשוב נמסר בצורה שהלקוחה לא יכולה להשתמש בה.</b>
+      </div>
+
+      <button class="cta reveal" id="pCta" data-go="notice">
+        מה שמתם לב אליו? <span class="ms" aria-hidden="true">arrow_back</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · שליפה לפני הסבר ============ -->
+<section class="screen" data-screen="notice">
+  <div class="stage narrow">
+    <div class="kicker type-target" id="nPrompt"></div>
+    <h2 class="type-target" id="nQuestion"></h2>
+
+    <div class="notice-options reveal" id="noticeOptions"></div>
+
+    <div class="notice-result" id="noticeResult" hidden>
+      <div class="nr-mark" id="nrMark"><span class="ms" aria-hidden="true">check</span></div>
+      <div class="nr-body">
+        <b id="nrTitle"></b>
+        <p id="nrWhy"></p>
+      </div>
+    </div>
+
+    <div class="notice-reveal" id="noticeReveal" hidden>
+      <p class="type-target" id="nRevealText"></p>
+      <button class="cta" data-go="skill">
+        למיומנות של הפרק <span class="ms" aria-hidden="true">arrow_back</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · המיומנות ============ -->
+<section class="screen" data-screen="skill">
+  <div class="skill-split">
+    <div class="skill-side">
+      <div class="skill-card-visual reveal deep" id="skillCardVisual">
+        <div class="scv-top">
+          <span>כלי #01</span>
+          <span class="ms" aria-hidden="true">auto_awesome</span>
+        </div>
+        <strong>תקשורת מותאמת</strong>
+        <small>שאלו · תארו · פרקו · בדקו</small>
+      </div>
+      <div class="kicker type-target" id="sIntro"></div>
+      <p class="large-copy type-target" id="sSub"></p>
+    </div>
+
+    <div class="skill-rules">
+      <div class="rule" id="rule1"><b>01</b><div><strong>שואלים לפני שמניחים</strong><span class="type-target" id="rule1Text"></span></div></div>
+      <div class="rule" id="rule2"><b>02</b><div><strong>מתארים, לא מצביעים</strong><span class="type-target" id="rule2Text"></span></div></div>
+      <div class="rule" id="rule3"><b>03</b><div><strong>מפרקים לצעדים</strong><span class="type-target" id="rule3Text"></span></div></div>
+      <div class="rule" id="rule4"><b>04</b><div><strong>בודקים הבנה</strong><span class="type-target" id="rule4Text"></span></div></div>
+    </div>
+  </div>
+
+  <div class="bridge reveal" id="sCta">
+    <span>עכשיו נבדוק אם המיומנות עובדת גם כשהמצב משתנה.</span>
+    <button class="cta small" data-go="scenario">
+      לתרגול <span class="ms" aria-hidden="true">arrow_back</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ 06 · המקרה ============ -->
+<section class="screen" data-screen="scenario">
+  <div class="stage narrow">
+    <div class="kicker type-target" id="cIntro"></div>
+    <h2>עדי פונה אליכם אחרי שניסתה לבד.</h2>
+    <div class="scenario-badge">
+      <span class="ms" aria-hidden="true">block</span> אין מערכת · רק השיחה
+    </div>
+
+    <div class="case-card reveal" id="caseCard">
+      <div class="case-avatar"></div>
+      <div class="case-text">
+        <span>עדי</span>
+        <p class="type-target" id="cQuote"></p>
+      </div>
+    </div>
+
+    <div class="goal-card">
+      <span>המשימה שלך</span>
+      <b class="type-target" id="cMission"></b>
+    </div>
+
+    <button class="cta reveal" id="cCta" data-go="practice">
+      התחילו את השיחה <span class="ms" aria-hidden="true">arrow_back</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ 07 · השיחה ============ -->
+<section class="screen" data-screen="practice">
+  <div class="practice-head">
+    <div>
+      <div class="kicker">שיחה מדומה · 3 רגעים</div>
+      <h2>מה הייתם עונים לעדי?</h2>
+      <p class="soft type-target" id="prNote"></p>
+    </div>
+    <div class="moment"><span id="momentNo">1</span><small>מתוך 3</small></div>
+  </div>
+
+  <div class="practice-split">
+    <div class="chat-window enter-3d">
+      <div class="chat-head">
+        <div class="case-avatar small"></div>
+        <div class="ch-id"><b>עדי</b><small id="chatStatus">שיחת שירות</small></div>
+        <div class="sim-tag">תרגול</div>
+      </div>
+
+      <div class="chat-body" id="chatBody"></div>
+
+      <div class="answer-area" id="answerArea">
+        <div class="answer-label">בחרו את התגובה שהייתם נותנים</div>
+        <div id="answers" class="answer-grid"></div>
+      </div>
+    </div>
+
+    <!-- לוג שנבנה במהלך השיחה ולא נעלם -->
+    <aside class="feedback-log enter-3d d1">
+      <div class="fl-head">
+        <span class="kicker">מה נבנה עד עכשיו</span>
+        <b id="logCount">0 / 3</b>
+      </div>
+      <ol class="fl-items" id="logItems"></ol>
+      <p class="fl-empty" id="logEmpty">כאן יצטבר ניתוח הבחירות שלכם, רגע אחרי רגע.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 08 · הערכה ============ -->
+<section class="screen" data-screen="feedback">
+  <div class="feedback-split">
+    <div class="fb-summary">
+      <div class="kicker">הערכת הפרק</div>
+      <h2 id="feedbackHeadline"></h2>
+      <p class="type-target soft" id="fIntro"></p>
+      <div class="score-ring enter-3d" id="scoreRing">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+          <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52"></circle>
+        </svg>
+        <div class="ring-text"><strong id="scoreBig">0</strong><span>מתוך 100</span></div>
+      </div>
+      <div class="feedback-verdict enter-3d d1" id="feedbackVerdict"></div>
+    </div>
+
+    <div class="fb-detail">
+      <h3>ארבעת העקרונות שבדקנו</h3>
+      <div id="feedbackRows"></div>
+      <div class="coach-card enter-3d d2">
+        <span class="ms" aria-hidden="true">auto_awesome</span>
+        <div><b>משוב אישי</b><p id="coachMessage"></p></div>
+      </div>
+      <button class="cta" data-go="reward">
+        מה לקחת איתך? <span class="ms" aria-hidden="true">arrow_back</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 · סיום ============ -->
+<section class="screen" data-screen="reward">
+  <div class="stage narrow">
+    <div class="reward-mark enter-3d"><span class="ms" aria-hidden="true">check</span></div>
+    <div class="kicker">הפרק הושלם</div>
+    <h2>עוד כלי נכנס לארגז שלך.</h2>
+    <p class="type-target lead" id="rLead"></p>
+
+    <div class="tool-unlocked reveal deep" id="toolUnlocked">
+      <span>כלי #01</span>
+      <strong>תקשורת מותאמת</strong>
+      <small>שאלו · תארו · פרקו · בדקו</small>
+    </div>
+
+    <p class="type-target soft" id="rLead2"></p>
+
+    <div class="next-chapter reveal" id="nextChapter">
+      <div class="next-num">02</div>
+      <div class="nc-body">
+        <small>הפרק הבא</small>
+        <b>אליאור · תקשורת ברורה ונגישה</b>
+        <span>נפתח עם השלמת הפרק הנוכחי</span>
+      </div>
+      <span class="ms lock-icon" aria-hidden="true">lock</span>
+    </div>
+
+    <button class="cta reveal" id="rCta" data-action="finishChapter">
+      חזרה למסע שלי <span class="ms" aria-hidden="true">arrow_back</span>
+    </button>
+  </div>
+</section>
+
+</main>
+
+<!-- רמז גלילה — מופיע רק כשהמסך הבא נפתח -->
+<div class="peek-hint" id="peekHint" hidden>
+  <span class="ms" aria-hidden="true">keyboard_double_arrow_down</span>
+  <small>גללו להמשך</small>
+</div>
+
+<!-- ============ סרגל הקריינות ============ -->
+<div class="narrator-bar" id="narratorBar" data-speaker="narrator">
+  <div class="nb-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="nb-meta">
+    <small id="speakerLabel">הקול המנחה</small>
+    <div class="beat-dots" id="beatDots"></div>
+  </div>
+  <div class="nb-controls">
+    <button class="nb-btn" id="btnPause" title="השהיה / המשך" aria-label="השהיה או המשך">
+      <span class="ms" aria-hidden="true">pause</span>
+    </button>
+    <button class="nb-btn" id="btnReplay" title="השמעה חוזרת" aria-label="השמעה חוזרת">
+      <span class="ms" aria-hidden="true">replay</span>
+    </button>
+    <button class="nb-btn" id="btnSkip" title="דילוג על הקריינות" aria-label="דילוג על הקריינות">
+      <span class="ms" aria-hidden="true">skip_next</span>
+    </button>
+    <button class="nb-btn" id="btnMute" title="השתקת הקריינות" aria-label="השתקת הקריינות">
+      <span class="ms" aria-hidden="true">volume_up</span>
+    </button>
+    <button class="nb-btn" id="btnMusic" title="מוזיקת רקע · גלי אלפא" aria-label="מוזיקת רקע">
+      <span class="ms" aria-hidden="true">music_off</span>
+    </button>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script src="content.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

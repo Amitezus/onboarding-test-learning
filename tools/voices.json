@@ -1,0 +1,20 @@
+{
+  "_comment": "eleven_v3 הוא המודל היחיד של ElevenLabs שמבטא עברית תקין. עם turbo/multilingual ההגייה נשברת. אל תשנו אותו.",
+  "model_id": "eleven_v3",
+  "output_format": "mp3_44100_128",
+  "default_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "use_speaker_boost": true
+  },
+  "voices": {
+    "narrator": {
+      "_note": "Lauren - Friendly, Comforting and Soft",
+      "voice_id": "DODLEQrClDo8wCz460ld"
+    },
+    "adi": {
+      "_note": "אותו קול כמו הקריין, לפי החלטה. להחלפה — רק להחליף כאן voice_id.",
+      "voice_id": "DODLEQrClDo8wCz460ld"
+    }
+  }
+}
